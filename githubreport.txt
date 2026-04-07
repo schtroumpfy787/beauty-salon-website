@@ -1,0 +1,517 @@
+================================================================================
+  TECHNICAL AUDIT REPORT
+  Repository: beauty-salon-website (Institut For You)
+  Audit Date: 2026-03-02
+  Auditor: Automated Technical Audit
+================================================================================
+
+
+================================================================================
+1. PROJECT OVERVIEW
+================================================================================
+
+What the project appears to be:
+  A custom-built website for "Institut For You," a real beauty salon located in
+  Tarascon, Provence, France. The salon is owned by the developer's
+  mother-in-law (Brigitte), who is an esthetician. The website is intended to
+  eventually replace the salon's existing WordPress site.
+
+Intended purpose and scope:
+  The project is divided into six planned phases:
+    Phase 1: Planning and mocking (complete)
+    Phase 2: Front-end implementation (complete)
+    Phase 3: Front-end cleanup (complete, last updated May 2024)
+    Phase 4: Back-end implementation (not started)
+    Phase 5: Content management / admin CMS (not started)
+    Phase 6: Deployment, testing, and polish (not started)
+
+  The long-term vision includes a simplified CMS that allows the salon owner
+  to perform CRUD operations on services (prices, descriptions) through a
+  guided admin interface, without needing technical expertise.
+
+Target users:
+  - Primary: French-speaking female clientele seeking beauty services (the
+    salon is reserved for female clients)
+  - Secondary: The salon owner, who would use the admin CMS (Phase 5)
+  - Content language: French (code and comments are in English)
+
+Current live deployment:
+  The front-end is deployed to GitHub Pages at:
+  https://leo-code-ca.github.io/beauty-salon-website/
+
+
+================================================================================
+2. CODEBASE STRUCTURE
+================================================================================
+
+Root directory layout:
+  home.html              - Homepage
+  about.html             - About page
+  massages.html          - Massages services page
+  contact.html           - Contact form page
+  gift.html              - Gift card simulator page
+  package.json           - Node.js package manifest
+  package-lock.json      - Dependency lock file
+  README.md              - Project documentation
+  .gitignore             - Git ignore rules
+  CSS/                   - Compiled CSS output
+  Sass/                  - Source SCSS files
+  Js/                    - JavaScript modules
+  components/            - Reusable HTML component fragments
+  images/                - Image assets organized by page
+  videos/                - Video assets (MP4, MOV)
+
+JavaScript directory (Js/):
+  data/                  - Static data files (constants, services, search, images)
+  home/                  - Homepage-specific modules (6 files)
+  about/                 - About page modules (4 files)
+  contact/               - Contact page modules (3 files)
+  gift/                  - Gift card modules (3 files)
+  treatments/            - Treatments/massages modules (2 files)
+  utils/                 - Shared utility modules (7 files)
+  external-code/         - Google Maps API integration (2 files)
+  navbar.js              - Navigation bar logic
+  footer.js              - Footer logic with map integration
+  backToTop.js           - Scroll-to-top button logic
+
+Sass directory (Sass/):
+  main.scss              - Entry point importing all partials
+  _custom.scss           - Design tokens and Bootstrap overrides
+  components/            - Global classes, functions, mixins, typography
+  sections/              - Page-specific styles organized by section
+
+HTML components (components/):
+  navbar.html            - Navigation bar markup
+  footer.html            - Footer markup
+  reviews.html           - Customer reviews carousel
+  faq.html               - FAQ accordion
+
+File counts:
+  JavaScript files: 34 (approximately 2,800 lines)
+  SCSS files: 32 (approximately 4,074 lines)
+  HTML files: 9 (5 pages + 4 components, approximately 1,371 lines)
+  Image assets: 77 files (34 MB total)
+  Video assets: 2 files (108 MB total)
+
+Assessment:
+  The folder organization is logical and well-structured. Files are grouped
+  by page/feature with clear naming conventions. The separation between data,
+  utilities, page-specific logic, and external code shows deliberate
+  architectural thinking. The BEM-like naming in Sass is consistent. The
+  only inconsistency is the use of uppercase directory names (Js/, CSS/, Sass/)
+  which is unconventional but consistent within the project.
+
+
+================================================================================
+3. TECHNOLOGY STACK
+================================================================================
+
+Core technologies:
+  - HTML5 with semantic markup
+  - CSS3 via Sass (SCSS syntax)
+  - Vanilla JavaScript (ES6 modules)
+  - Bootstrap 5.3.2 (CSS framework and grid)
+
+Dependencies (from package.json):
+  - bootstrap: ^5.3.2 (current stable is 5.3.x; reasonably up to date)
+  - autoprefixer: ^10.4.16 (CSS vendor prefix tool; reasonably up to date)
+
+External CDN resources:
+  - Google Fonts (Bodoni Moda, Libre Franklin)
+  - Font Awesome via kit (https://kit.fontawesome.com/36dedec49f.js)
+  - Google Maps JavaScript API (Places and Maps libraries)
+
+Build tools:
+  NONE. There is no build pipeline configured. No bundler (Webpack, Vite,
+  Rollup), no transpiler (Babel), no linter (ESLint), no formatter
+  (Prettier), no task runner. The package.json has no "scripts" section.
+  Sass is presumably compiled manually or via a separate tool not tracked
+  in the repository. The compiled CSS (main-min.css) is committed directly.
+
+Assessment:
+  The technology choices are functional but show the project was built by a
+  self-taught developer still learning. The author acknowledges in the README
+  that choosing vanilla JavaScript over React was a mistake for a project of
+  this scale, and that Bootstrap caused more friction than it solved. The
+  dependencies are not outdated, but the lack of any build tooling, linting,
+  or formatting configuration is a significant gap. The Font Awesome kit
+  includes a hardcoded kit ID (36dedec49f) which is tied to a specific
+  Font Awesome account.
+
+
+================================================================================
+4. IMPLEMENTATION STATUS
+================================================================================
+
+COMPLETE (Phases 1-3):
+  - Homepage: Fully implemented with video intro, animated text, features
+    accordion/table, benefits section, reviews carousel, and summary section
+    with scroll-bound animations.
+  - About page: Owner introduction, photo gallery with filtering, FAQ
+    accordion (content is lorem ipsum placeholder).
+  - Massages page: Overview cards with expandable details, detailed sections
+    for four massage types (kobido, beaute du regard, californien, gommage),
+    door illustration animation.
+  - Contact page: Dynamic form with conditional fields for appointments,
+    front-end validation, service suggestion algorithm after submission.
+  - Gift page: Gift card simulator with algorithm to find service
+    combinations by price, order flow with terms modal.
+  - Navbar: Responsive navigation with search bar, suggestions dropdown,
+    smart scroll detection.
+  - Footer: Contact info, opening hours, Google Maps placeholder, gift
+    card link.
+  - Reusable components: Navbar, footer, reviews, FAQ loaded via fetch.
+
+PARTIALLY IMPLEMENTED:
+  - Google Maps integration: API loader scripts exist but API keys are empty
+    strings. Maps and reviews will not load in current state.
+  - FAQ section: Structure is complete but all answer text is lorem ipsum
+    placeholder content.
+  - Reviews carousel: HTML structure and JS logic exist but depend on
+    Google Places API which has empty keys.
+  - Service images: All service images in servicesData.js use placeholder
+    URLs (placehold.co/400).
+  - Gift card order: Flow ends with a JavaScript alert placeholder
+    ("Redirection to the order endpoint...") instead of actual payment.
+
+NOT IMPLEMENTED (Phases 4-6):
+  - Back-end server (Node.js/Express planned)
+  - Database setup and data persistence
+  - Server-side form validation
+  - Contact form submission (currently front-end only, no email/API)
+  - Admin CMS interface
+  - User authentication
+  - Waxing services page (waxing.html does not exist)
+  - Treatments services page (treatments.html does not exist)
+  - Payment/order processing integration
+  - Automated testing
+  - Production deployment configuration
+
+NOTABLE STUBS AND PLACEHOLDERS:
+  - Js/utils/inactiveLinks.js: Dev-only module that shows alerts for
+    unfinished endpoints. Comment says "remove for production" but it is
+    still active and imported.
+  - Js/gift/order.js line 36: alert() used as placeholder for order
+    endpoint redirect.
+  - Navbar dropdown links for "Soins" and "Epilations" are marked with
+    data-inactive="true" and point to "#".
+  - Favicon and logo are placeholder SVGs (placeholder_favicon.svg,
+    placeholder_logo.svg).
+
+
+================================================================================
+5. CODE QUALITY
+================================================================================
+
+Readability:
+  Generally good. Functions are named descriptively. Code is organized into
+  small, focused modules. Comments are present but sparse. The JavaScript
+  follows consistent formatting within files. HTML uses proper indentation
+  and clear section comments.
+
+Consistency:
+  Mostly consistent. BEM-like naming in Sass. ES6 module pattern used
+  throughout JavaScript. Minor inconsistencies include mixed camelCase
+  conventions (e.g., "openoptions" vs "openOptions" in footer.js) and
+  inconsistent use of semicolons.
+
+Error handling:
+  Weak. Most error handling consists of console.log(error) in catch blocks.
+  No user-facing error messages. No error boundaries. Critical operations
+  like fetch calls have minimal error recovery. The fetchComponent utility
+  silently logs errors without informing the user if a component fails to
+  load.
+
+Reusability:
+  Good modular structure. Utility functions are extracted into shared
+  modules (fetchComponent, slideInObserver, lazyCarousel, scrollDirection,
+  scrollToElem, prefillForm). Data is separated from logic. HTML components
+  are loaded dynamically. However, slideInObserver.js has three nearly
+  identical handler functions that could be consolidated.
+
+Identified bugs and fragile logic:
+  - servicesData.js: Duplicate object properties at index "ebd" (duplicate
+    "price" and "duration" keys in the same object). The second values
+    silently overwrite the first.
+  - footer.js: Hardcoded latitude appears incorrect (47.81 instead of
+    approximately 43.80 for Tarascon, France).
+  - home_reviews.js: Accesses undocumented private Google API properties
+    (Gg, Hg, Jg) that will break when Google updates their API.
+  - home_intro.js: Regex /p|x/g is overly broad; removes all "p" and "x"
+    characters instead of just "px" units. Should be /(px|em)$/.
+  - home_summary.js: Typo in variable name "visisbleScrollBox" (extra "s").
+  - contact.html: Phone input has name="phome" (typo, should be "phone").
+  - about/gallery.js: Uses "new Error()" without "throw" keyword, so the
+    error is created but never thrown.
+  - backToTop.js: Uses loose equality operators (!=) instead of strict (!==).
+  - backToTop.js: No debouncing on scroll event handler that recalculates
+    colors on every scroll tick.
+  - gift/simulator.js: Recursive function with comment about infinite loop
+    risk but incomplete guard logic.
+
+
+================================================================================
+6. CONFIGURATION AND ENVIRONMENT
+================================================================================
+
+Build setup:
+  There is no build pipeline. The package.json contains no scripts. Sass
+  compilation is done externally (likely via a Sass CLI or IDE plugin). The
+  compiled and minified CSS (main-min.css) and its source map are committed
+  directly to the repository.
+
+  This means:
+  - There is no way to rebuild the CSS from the repository alone
+  - There is no documentation of the Sass compilation command
+  - The compiled CSS may drift from the source SCSS files
+
+Environment variables:
+  None. No .env file, no .env.example, no environment configuration of any
+  kind. The Google Maps API key is hardcoded as an empty string in the
+  client-side JavaScript files.
+
+Deployment readiness:
+  The front-end is deployed to GitHub Pages as a static site, which works
+  for the current state. However, there is no:
+  - CI/CD pipeline (no .github/workflows directory)
+  - Automated build process
+  - Automated testing
+  - Environment-specific configuration
+  - Production optimization beyond the pre-minified CSS
+
+Missing configurations:
+  - No Sass build script documented
+  - No linter configuration (ESLint, Stylelint)
+  - No formatter configuration (Prettier)
+  - No editor configuration (.editorconfig)
+  - No CI/CD workflow files
+  - No Docker or containerization files
+  - No deployment scripts
+
+Unsafe defaults:
+  - Bootstrap JS is loaded from node_modules/ path, which assumes
+    node_modules is deployed alongside the HTML files. This is unusual
+    for static sites and may cause issues in certain hosting environments.
+  - Font Awesome kit ID is hardcoded in HTML.
+
+
+================================================================================
+7. UX / UI
+================================================================================
+
+Note: This assessment is based on code analysis, not live testing.
+
+Responsiveness:
+  The project uses a sophisticated orientation-first responsive strategy
+  built on Bootstrap breakpoints. Portrait and landscape orientations are
+  handled separately with nested breakpoints. Media queries use Bootstrap's
+  media-breakpoint-up() mixin for consistent breakpoint usage. Typography
+  uses clamp() for fluid scaling. The developer acknowledges in the README
+  that responsiveness was initially neglected for the homepage (desktop-first
+  mistake) but corrected for subsequent pages.
+
+Accessibility:
+  Moderate effort has been made:
+  - Semantic HTML throughout (section, main, nav, article, figure, dl/dt/dd)
+  - ARIA attributes on interactive elements (aria-controls, aria-expanded,
+    aria-label)
+  - Form labels properly associated with inputs
+  - Alt text on images
+  - visually-hidden text for screen readers in some components
+  - Focus ring styles defined in Sass mixins
+
+  Gaps identified:
+  - body element starts with visibility:hidden (JavaScript dependency to
+    show content; users with JavaScript disabled see nothing)
+  - Some interactive elements lack focus-visible states
+  - No skip-to-content link
+  - Some hover-only interactions without keyboard equivalents
+  - Color contrast has not been formally verified (though primary purple
+    #9a1d71 on near-white #fcf8f8 likely passes WCAG AA)
+
+Visual consistency:
+  Consistent color palette defined in Sass custom properties. Consistent
+  typography scale using clamp(). Consistent use of spacing and border
+  patterns. SVG illustrations and placeholder images are used throughout.
+  However, placeholder images (placehold.co URLs in service data) and
+  placeholder text (lorem ipsum in FAQ) indicate unfinished visual polish.
+
+Signs of polish vs. prototype:
+  The project sits between prototype and polished. The HTML structure and
+  Sass organization are polished. Animations and scroll effects are
+  ambitious but the developer notes in the README that mobile animations
+  are "not smooth at all and even quite buggy." Placeholder content
+  (favicons, service images, FAQ answers) lowers the overall impression.
+
+
+================================================================================
+8. TESTING AND RELIABILITY
+================================================================================
+
+Tests:
+  NONE. There are no test files, no test directories, no test frameworks
+  installed, and no test scripts in package.json. The project has zero
+  automated test coverage.
+
+Risk areas due to lack of testing:
+  - Gift card simulator algorithm: Complex recursive logic with potential
+    for infinite loops. This is the highest-risk code in the project.
+  - Contact form validation: Front-end only validation with no server-side
+    backup. Validation logic could be bypassed entirely.
+  - Service suggestion algorithm: Complex conditional logic that determines
+    what services to recommend after form submission.
+  - Google Maps/Places API integration: Depends on undocumented private
+    API properties that could break silently.
+  - Dynamic component loading: Uses innerHTML injection which could fail
+    silently if fetch calls fail.
+  - Scroll-bound animations: Complex calculations on every scroll event
+    without bounds checking or performance guards.
+
+Reliability concerns:
+  - No error reporting mechanism (errors are console.logged)
+  - No fallback content if JavaScript fails to load
+  - Page content is initially hidden via CSS (visibility: hidden) and
+    revealed by JavaScript, meaning a JS error could result in a blank page
+  - No graceful degradation for users without JavaScript
+  - No service worker or offline capabilities
+
+
+================================================================================
+9. SECURITY AND BEST PRACTICES
+================================================================================
+
+Hardcoded secrets:
+  - Google Maps API keys are empty strings in client-side files
+    (Js/external-code/gm_mapsapi.js and gm_placeapi.js). This is
+    currently safe because the keys are empty, but when populated, API
+    keys in client-side JavaScript are exposed to anyone viewing source.
+    A backend proxy should be used instead.
+  - Font Awesome kit ID (36dedec49f) is hardcoded in all HTML pages.
+    This is a low-risk exposure but could allow unauthorized usage of the
+    kit allocation.
+
+XSS (Cross-Site Scripting) risks:
+  - innerHTML is used in 18 locations across the codebase without
+    sanitization. Current risk is low because data comes from local static
+    files and the Google Places API, not user input. However, when the
+    backend is added (Phase 4), any user-generated content displayed via
+    innerHTML will be vulnerable to XSS unless sanitized.
+  - Key locations: fetchComponent.js (line 9), navbar.js (multiple),
+    simulator.js (multiple), home_reviews.js (lines 59-61).
+
+Other security observations:
+  - Contact form uses novalidate attribute and relies entirely on
+    client-side JavaScript validation. There is no server-side validation.
+    A malicious user could submit arbitrary data by disabling JavaScript.
+  - No Content Security Policy (CSP) headers configured.
+  - No Subresource Integrity (SRI) hashes on CDN-loaded scripts.
+  - External Font Awesome script loaded without integrity check.
+  - node_modules/bootstrap/dist/js/bootstrap.bundle.min.js loaded directly
+    from node_modules path in production HTML, which is unconventional.
+
+Best practices not followed:
+  - No linting or formatting enforcement
+  - No pre-commit hooks
+  - No dependency audit workflow
+  - No automated security scanning
+  - console.log() used for error handling in production code
+  - alert() used as a placeholder in production-deployed code
+  - Dev-only utility (inactiveLinks.js) still active in production
+
+Positive security practices:
+  - No hardcoded passwords or tokens found
+  - API keys are empty (not leaked)
+  - Form inputs have appropriate type attributes
+  - HTML lang attribute is set correctly
+  - Viewport meta tag is properly configured
+
+
+================================================================================
+SUMMARY
+================================================================================
+
+Project maturity classification: PROTOTYPE / EARLY MVP
+
+  The project has completed its front-end implementation (Phases 1-3) and
+  is deployed to GitHub Pages as a static site. However, it is missing its
+  entire back-end (Phases 4-6), has no testing, no build pipeline, no CI/CD,
+  and contains multiple placeholder elements. The front-end is functional
+  and demonstrates significant effort and learning, but it is not
+  production-ready for a real business.
+
+What would be required to finish it properly:
+  1. Back-end server (Node.js/Express or equivalent) with:
+     - Database setup for services, reviews, and content
+     - Server-side form validation and submission handling
+     - API proxy for Google Maps (to protect API keys)
+     - Contact form email/notification system
+     - Payment integration for gift card orders
+  2. Admin CMS interface for the salon owner
+  3. User authentication and authorization
+  4. Two missing service pages (waxing and treatments)
+  5. Build pipeline (bundler, Sass compiler, minification)
+  6. Linting and formatting configuration
+  7. Automated testing (at minimum: form validation, gift simulator algorithm)
+  8. CI/CD pipeline for automated builds and deployments
+  9. Replacement of all placeholder content (FAQ answers, service images,
+     favicon, logo)
+  10. Security hardening (CSP headers, SRI hashes, input sanitization)
+  11. Accessibility audit and remediation
+  12. Performance optimization (video compression, image optimization,
+      scroll handler debouncing)
+  13. Fix identified bugs (coordinates typo, duplicate data properties,
+      regex errors, private API property usage)
+
+Whether it is safe to build on top of:
+  CONDITIONALLY YES, with caveats. The front-end architecture is well-
+  organized and modular enough to extend. However, the choice of vanilla
+  JavaScript for this scale of project makes adding features significantly
+  harder than it would be with a framework like React or Vue. The author
+  acknowledges this in the README. A new maintainer should seriously
+  consider whether to continue with vanilla JS or migrate to a framework
+  before adding backend integration.
+
+  The Sass organization is solid and can be extended without difficulty.
+  The HTML is semantic and well-structured. The data layer (servicesData,
+  searchData, salonImages) provides a reasonable abstraction that could
+  be replaced with API calls when the backend is built.
+
+Key risks a new maintainer should know:
+  1. NO TESTS: There is zero automated test coverage. Any change could
+     break existing functionality with no safety net.
+  2. NO BUILD PIPELINE: CSS compilation is done externally with no
+     documented process. A new developer cannot rebuild the CSS without
+     figuring out the compilation setup.
+  3. GOOGLE API DEPENDENCY: The reviews and maps features depend on
+     accessing undocumented private properties of the Google Maps JS API.
+     These WILL break when Google updates their API.
+  4. VANILLA JS AT SCALE: With 34 JavaScript files and 2,800 lines of
+     vanilla JS, the codebase is manageable but at the upper limit of
+     what is comfortable without a framework. State management, routing,
+     and component lifecycle are all handled manually.
+  5. LARGE MEDIA FILES: 108 MB of video files and 34 MB of images are
+     committed directly to the git repository. This bloats the repo and
+     makes cloning slow. These should be moved to a CDN or media hosting.
+  6. PLACEHOLDER CONTENT: Multiple user-facing elements use placeholder
+     data (FAQ, service images, reviews, favicon). These need real content
+     before any public launch.
+  7. HARDCODED COORDINATES: The salon coordinates in footer.js appear to
+     have an incorrect latitude (47.81 instead of approximately 43.80 for
+     Tarascon, France).
+  8. PROJECT ON HOLD: Per the README (last updated May 2024), the developer
+     paused active development to focus on job hunting. The project has
+     been in Phase 3 (cleanup) for an extended period.
+
+Final assessment:
+  This project represents a substantial learning effort by a self-taught
+  developer. The code organization, modular architecture, and attention to
+  semantic HTML are commendable for a solo project. However, it is only
+  roughly 50% complete relative to its stated vision (3 of 6 phases done),
+  with the remaining work being arguably the harder half (backend, CMS,
+  authentication, deployment). A new maintainer inheriting this project
+  should plan for significant additional work before it can serve as a
+  real business website.
+
+================================================================================
+END OF REPORT
+================================================================================
