@@ -33,7 +33,13 @@ function handleToggleBtnState() {
 // handle accept terms of sale and proceed
 function handlePurchaseStepTwo(e) {
     e.preventDefault();
-    if (checkbox && checkbox.checked) alert('Redirection to the order endpoint managed by a third party.');
+    if (checkbox && checkbox.checked) {
+        const msg = document.createElement('p');
+        msg.textContent = 'Votre commande a été enregistrée. Vous serez recontactée par email pour finaliser le paiement.';
+        msg.classList.add('alert', 'alert-success', 'mt-3');
+        confirmBtn.parentElement.appendChild(msg);
+        confirmBtn.setAttribute('disabled', true);
+    }
 }
 
 // Call the functions and add the event handlers on load of the page

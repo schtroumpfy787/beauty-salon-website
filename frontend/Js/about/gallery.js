@@ -62,8 +62,7 @@ function handleWindowSize(imgCollection) {
     if (vw) {
         return vw <= 768 ? createImgLayout(2, imgCollection)
         : vw <= 1200 ? createImgLayout(3, imgCollection)
-        : vw > 1200 ? createImgLayout(4, imgCollection)
-        : new Error("vw must be a number");
+        : createImgLayout(4, imgCollection);
     }
 }
 

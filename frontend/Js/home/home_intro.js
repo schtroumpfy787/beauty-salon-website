@@ -54,7 +54,7 @@ function handleFontSize(element, container) {
     if (element && container) {
         let elementWidth = element?.clientWidth;
         let containerWidth = container?.clientWidth;
-        const currentFontSize = Number(window.getComputedStyle(element)?.fontSize.replaceAll(/p|x/g, ""));
+        const currentFontSize = Number(window.getComputedStyle(element)?.fontSize.replace(/px$/, ""));
         let nextFontSize = currentFontSize;
     
         if (elementWidth > containerWidth) {

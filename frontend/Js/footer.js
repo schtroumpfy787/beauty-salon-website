@@ -29,7 +29,7 @@ async function handleFetchMap() {
                 zoom: 15,
             });
 
-            map.setCenter({ lat: 47.81035232543945, lng: 4.6635764 });
+            map.setCenter(position);
         }
 
         if (Map && Marker && Animation) {

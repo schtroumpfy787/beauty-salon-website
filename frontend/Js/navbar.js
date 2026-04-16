@@ -4,7 +4,7 @@
 import scrollToElem from './utils/scrollToElem.js';
 import { search_params } from './data/searchData.js';
 import handleFetchComponent from './utils/fetchComponent.js';
-import handleInactiveLinks from './utils/inactiveLinks.js';
+
 // HTML Elements
 const root = document.querySelector(':root');
 const navbarWrapper = document.querySelector('#nav');
@@ -240,8 +240,7 @@ window.addEventListener('load', async () => {
         submitBtn ? submitBtn.addEventListener('click', (e) => handleSearchBarSubmit(e)) : null;
         // scroll to elem if url contains query params
         handleQueryParamsParsing();
-        // handle inactive links on every page - dev purpose only - remove for production
-        handleInactiveLinks();
+
         // once everything is setup, make the page content visible
         document.body.style.visibility = 'visible';
     }

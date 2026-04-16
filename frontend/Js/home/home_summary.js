@@ -7,7 +7,7 @@ import { purpleIshPalette, blackNWhitePalette, filters } from "./../data/constan
 // Media Queries
 const mediaQuery = window.matchMedia("(orientation: portrait) and (max-width: 767px)");
 // HTML Elements
-const visisbleScrollBox = document.querySelector('.summary__animationBox');
+const visibleScrollBox = document.querySelector('.summary__animationBox');
 const elemOne = document.querySelector('.summary__box:nth-child(1)');
 const elemTwo = document.querySelector('.summary__box:nth-child(2)');
 const elemThree = document.querySelector('.summary__box:nth-child(3)');
@@ -26,8 +26,8 @@ let positiveTranslate;
 let totalTranslate;
 let translateBreakPeriod;
 const navBarHeight = getComputedStyle(html).getPropertyValue('--navbarHeight').replace(/[a-z]*/gi, '') * 16 ?? 56;
-const visibleBoxHeight = visisbleScrollBox?.clientHeight;
-const fullBoxHeight = visisbleScrollBox?.scrollHeight;
+const visibleBoxHeight = visibleScrollBox?.clientHeight;
+const fullBoxHeight = visibleScrollBox?.scrollHeight;
 const scrollArea = fullBoxHeight - visibleBoxHeight;
 const goalHeight = window.innerHeight / 100 * 70;
 const boxTop = ((window.innerHeight - navBarHeight) - goalHeight) / 2;
@@ -126,7 +126,7 @@ function handleBtnOutlineAnimation(translatePercentage, staticPhasePercentage, t
 // Handle scroll bound animation
 function handleScrollBoundAnimation() {
 
-    const lengthFromTop = visisbleScrollBox.scrollTop;
+    const lengthFromTop = visibleScrollBox.scrollTop;
     const scrollPercentage = Math.ceil(lengthFromTop) / scrollArea * 100;
     const translateUpdateRate = 33 / (translateBreakPeriod + totalTranslate);
 
@@ -271,7 +271,7 @@ function handleScrollBoundAnimation() {
 // Handle automatic page scroll when the animation element is in the viewport
 function handleAutoScroll(entries) {
 
-    const elementPosition = visisbleScrollBox.offsetTop - navBarHeight;
+    const elementPosition = visibleScrollBox.offsetTop - navBarHeight;
 
     entries.forEach(entry => {
 
@@ -290,15 +290,15 @@ function handleAutoScroll(entries) {
 function handlePageScrollBehaviour() {
 
     const scrollDirection = FnScrollDirection(scrollY);
-    const scrollToBottom = Math.round(fullBoxHeight - visisbleScrollBox?.scrollTop) === visisbleScrollBox?.clientHeight;
-    const scrollToTop = Math.round(visisbleScrollBox?.scrollTop) === 0;
+    const scrollToBottom = Math.round(fullBoxHeight - visibleScrollBox?.scrollTop) === visibleScrollBox?.clientHeight;
+    const scrollToTop = Math.round(visibleScrollBox?.scrollTop) === 0;
 
-    const elementPosition = visisbleScrollBox?.offsetTop - navBarHeight;
+    const elementPosition = visibleScrollBox?.offsetTop - navBarHeight;
 
     if (scrollDirection === "down" && scrollY > elementPosition && !scrollToBottom) {
 
         // as the position is not really accurate, allow a small margin of error
-        const difference = visisbleScrollBox?.clientHeight - (fullBoxHeight - visisbleScrollBox?.scrollTop);
+        const difference = visibleScrollBox?.clientHeight - (fullBoxHeight - visibleScrollBox?.scrollTop);
         if (difference >= -1 && difference <= 1) return;
 
         window.scrollTo({
@@ -309,7 +309,7 @@ function handlePageScrollBehaviour() {
     } else if (scrollDirection === "up" && scrollY < elementPosition && !scrollToTop) {
 
         // as the position is not really accurate, allow a small margin of error
-        const difference = Math.round(visisbleScrollBox?.scrollTop);
+        const difference = Math.round(visibleScrollBox?.scrollTop);
         if (difference >= -1 && difference <= 1) return;
 
         window.scrollTo({
@@ -361,8 +361,8 @@ function handleMediaQuerySetup() {
         handleSummarySlideInAnimation();
         // Remove animation event listeners
         window.removeEventListener('scroll', handlePageScrollBehaviour);
-        visisbleScrollBox.removeEventListener('scroll', handleScrollBoundAnimation);
-        animationObserver.unobserve(visisbleScrollBox);
+        visibleScrollBox.removeEventListener('scroll', handleScrollBoundAnimation);
+        animationObserver.unobserve(visibleScrollBox);
     }
 
     // Mobile portrait orientation - animation should run
@@ -379,10 +379,10 @@ function handleMediaQuerySetup() {
         // set the top property depending on the screen height 
         html.style.setProperty('--review-box-top', `${boxTop}px`);
         // Handle page behaviour
-        visisbleScrollBox ? animationObserver.observe(visisbleScrollBox) : null;
+        visibleScrollBox ? animationObserver.observe(visibleScrollBox) : null;
         window.addEventListener("scroll", handlePageScrollBehaviour)
         // Handle scroll bound animation
-        visisbleScrollBox ? visisbleScrollBox.addEventListener('scroll', handleScrollBoundAnimation) : null;
+        visibleScrollBox ? visibleScrollBox.addEventListener('scroll', handleScrollBoundAnimation) : null;
     }
 }
 

@@ -3,6 +3,15 @@
 // Imports
 import { colorContrastPalette } from './data/constants.js';
 import { animationObserver } from './home/home_summary.js';
+
+function debounce(fn, delay) {
+    let timer;
+    return function(...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn.apply(this, args), delay);
+    };
+}
+
 // HTML Elements
 const backToTopBtn = document.querySelector('.scrollTop');
 const summary = document.querySelector('.summary__animationBox');
@@ -30,7 +39,7 @@ function handleDetectBgColor() {
                 const [r, g, b] = getComputedStyle(backgroundElems[i]).backgroundColor.match(/\d+/g);
     
                 [r, g, b].map(colorCompo => {
-                    if (colorCompo != 0) {
+                    if (Number(colorCompo) !== 0) {
                         differentThanZero = true;
                     }
                 })
@@ -153,7 +162,7 @@ function handleScrollBackToTop() {
 // Call the function and add the event handlers on load of the page
 window.addEventListener('load', () => {
     // adjust the back to top cutton bg color on load and on scroll
-    window.addEventListener('scroll', () => handleAdjustBgColor());
+    window.addEventListener('scroll', debounce(() => handleAdjustBgColor(), 50));
     handleAdjustBgColor();
     // scroll back to top on click
     backToTopBtn.addEventListener('click', handleScrollBackToTop);

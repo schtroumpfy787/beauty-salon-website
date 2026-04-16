@@ -265,8 +265,6 @@ export const services_data = [
         group: 'Épilations',
         value: 'ebd',
         name: 'Épilation des 1/2 bras',
-        price: 18,
-        duration: 20,
         price: 12,
         duration: 15,
         path: "/",
