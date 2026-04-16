@@ -20,9 +20,44 @@ const addBtn = document.querySelector('.contact__addBtn');
 ///////// START OF THE JS ////////
 
 // Handle page display after valid form submission
-function handleValidForm(e) {
+async function handleValidForm(e) {
 
 	e.preventDefault();
+
+	// Collect form data
+	const formData = {
+		name: form.querySelector('#name')?.value || '',
+		email: form.querySelector('#email')?.value || '',
+		phone: form.querySelector('#phone')?.value || '',
+		contactMotive: select?.selectedOptions[0]?.value || '',
+		message: textarea?.value || '',
+	};
+
+	// Collect selected services if appointment
+	const apptRequests = document.querySelectorAll('.contact__hiddenSelect');
+	if (formData.contactMotive === 'appt' && apptRequests && apptRequests.length > 0) {
+		const services = [];
+		apptRequests.forEach(s => {
+			if (s.selectedOptions[0]?.value) services.push(s.selectedOptions[0]?.textContent);
+		});
+		formData.services = services.join(', ');
+	}
+
+	// Submit to backend API
+	try {
+		const response = await fetch('/api/contact', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(formData),
+		});
+		if (!response.ok) {
+			const errData = await response.json();
+			console.error('Form submission error:', errData);
+		}
+	} catch (err) {
+		console.error('Form submission failed:', err);
+		// Still show summary even if API fails - the form data is displayed locally
+	}
 
 	if (form && formSummary) {
 		form.classList.remove('d-flex');
@@ -43,7 +78,6 @@ function handleValidForm(e) {
 			weekday: 'long',
 		});
 
-		const apptRequests = document.querySelectorAll('.contact__hiddenSelect');
 		if (submittedMessageTopic === 'Demande de rendez-vous' && formServices && apptRequests && apptRequests.length > 0) {
 			formServices.classList.remove('d-none');
 			apptRequests.forEach(select => {

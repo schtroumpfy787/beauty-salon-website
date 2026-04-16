@@ -2,7 +2,6 @@
 
 // Imports
 import { colorContrastPalette } from './data/constants.js';
-import { animationObserver } from './home/home_summary.js';
 
 function debounce(fn, delay) {
     let timer;
@@ -14,7 +13,6 @@ function debounce(fn, delay) {
 
 // HTML Elements
 const backToTopBtn = document.querySelector('.scrollTop');
-const summary = document.querySelector('.summary__animationBox');
 
 ///////// START OF THE JS ////////
 
@@ -137,21 +135,6 @@ function handleAdjustBgColor(colorSet = undefined) {
 
 // handle scroll back to top
 function handleScrollBackToTop() {
-
-    function cleanup() {
-        animationObserver.observe(summary);
-        window.removeEventListener('scrollend', cleanup);
-    }
-
-    if (summary) {
-        window.addEventListener('scrollend', cleanup);
-        animationObserver.unobserve(summary);
-        summary.scrollTo({
-            top: 0,
-            behavior: 'instant'
-        })
-    }
-    
     window.scrollTo({
         top: 0,
         behavior: 'smooth'
