@@ -48,7 +48,7 @@ const siteContentData = [
   { key: 'salon_address', value: '3 Faubourg Voltaire, 13150 Tarascon, France' },
   { key: 'salon_phone', value: '04 90 91 XX XX' },
   { key: 'owner_name', value: 'Brigitte' },
-  { key: 'owner_bio', value: "Depuis 2015, Brigitte, esthétcienne diplômée, vous reçoit sur rendez-vous du Mardi au Samedi pour vous offrir diverses prestations esthétiques: épilations, massages, soins du corps et du visage." },
+  { key: 'owner_bio', value: "Depuis 2015, Brigitte, esthéticienne diplômée, vous reçoit sur rendez-vous du Mardi au Samedi pour vous offrir diverses prestations esthétiques: épilations, massages, soins du corps et du visage." },
 ];
 
 async function seed() {
