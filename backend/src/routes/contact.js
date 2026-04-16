@@ -12,12 +12,12 @@ router.post(
   '/',
   rateLimiter(5, 60000),
   [
-    body('name').trim().notEmpty().withMessage('Le nom est requis').escape(),
+    body('name').trim().notEmpty().withMessage('Le nom est requis').isLength({ max: 200 }).escape(),
     body('email').isEmail().withMessage('Adresse email invalide').normalizeEmail(),
     body('phone').trim().matches(/^\d{10}$/).withMessage('Le numéro de téléphone doit contenir 10 chiffres'),
-    body('contactMotive').trim().notEmpty().withMessage('Le motif est requis').escape(),
-    body('message').trim().notEmpty().withMessage('Le message est requis').escape(),
-    body('services').optional().escape(),
+    body('contactMotive').trim().notEmpty().withMessage('Le motif est requis').isLength({ max: 100 }).escape(),
+    body('message').trim().notEmpty().withMessage('Le message est requis').isLength({ max: 5000 }).escape(),
+    body('services').optional().isLength({ max: 1000 }).escape(),
   ],
   async (req, res) => {
     const errors = validationResult(req);

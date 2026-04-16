@@ -10,7 +10,7 @@ const router = express.Router();
 // POST /api/admin/login
 router.post(
   '/login',
-  rateLimiter(5, 60000),
+  rateLimiter(3, 60000),
   [
     body('username').trim().notEmpty().escape(),
     body('password').notEmpty(),
@@ -257,8 +257,8 @@ router.post(
   '/faq',
   requireAuth,
   [
-    body('question').trim().notEmpty(),
-    body('answer').trim().notEmpty(),
+    body('question').trim().notEmpty().isLength({ max: 500 }),
+    body('answer').trim().notEmpty().isLength({ max: 5000 }),
     body('display_order').optional().isInt(),
   ],
   async (req, res) => {
