@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Contactez par téléphone ou email l'Institut For You, salon de beauté et de soins esthétiques à Tarascon en Provence, France">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="esthétique beauté épilation massage soins salon institut">
+    <meta name="author" content="Leo">
+    <title>Contact | Institut For You</title>
+    <link rel="stylesheet" href="CSS/main-min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/images/placeholder_favicon.svg" sizes="32x32">
+    <script src="/vendor/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/36dedec49f.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg bg-primary fixed-top w-100" id="nav"></nav>
+    <!-- START OF THE CONTACT PAGE CONTENT -->
+    <main class="overflow-hidden">
+        <div class="container-fluid">
+            <!-- BACK TO TOP FIXED BUTTON -->
+            <button class="btn position-fixed scrollTop" title="retour au haut de la page">
+                <i class="fa-solid fa-angles-up"></i>
+            </button>
+            <section class="row contact flex-column py-2">
+                <h1 class="text-center heading-1 my-3">Contact</h1>
+                <div class="contact__imgAndContent p-0">
+                    <div class="col contact__wrapper">
+                        <!-- FORM / NOT SUBMITTED -->
+                        <form class="d-flex flex-column gap-2 contact__form p-3" novalidate autocomplete="off">
+                            <div>
+                                <label for="name" class="form-label fw-bold">Nom</label>
+                                <input type="text" class="form-control" id="name" name="name"
+                                    placeholder="Entrez votre nom..." required>
+                                <p class="invalid-feedback">Veuillez entrer votre nom ci-dessous avant de soumettre le
+                                    formulaire.</p>
+                            </div>
+                            <div>
+                                <label for="email" class="form-label fw-bold">Email</label>
+                                <input type="email" class="form-control" id="email" name="email"
+                                    placeholder="Entrez votre adresse mail..." required>
+                                <p class="invalid-feedback">Veuillez entrer une adresse mail valide ci-dessus avant de
+                                    soumettre le
+                                    formulaire.</p>
+                            </div>
+                            <div>
+                                <label for="phone" class="form-label fw-bold">Téléphone</label>
+                                <input type="tel" pattern="\d{10}" name="phone" id="phone" class="form-control"
+                                    placeholder="Entrez votre numéro de téléphone..." required>
+                                <p class="invalid-feedback">Veuillez remplir le champ ci-dessus avec un numéro de
+                                    téléphone
+                                    composé
+                                    uniquement de dix chiffres, sans espaces ni symboles.</p>
+                            </div>
+                            <div>
+                                <label for="contactMotive" class="form-label fw-bold">Quel est le motif de votre
+                                    message?</label>
+                                <select name="contactMotive" id="contactMotive"
+                                    class="form-select contact__contactTopic" required>
+                                    <option value="" selected disabled>Sélectionner un motif</option>
+                                    <option value="appt">Demande de rendez-vous</option>
+                                    <option value="product">Produits de beauté et accessoires</option>
+                                    <option value="info">Demande d'informations</option>
+                                    <option value="feedback">Donner son avis</option>
+                                    <option value="other">Autre</option>
+                                </select>
+                                <p class="invalid-feedback">Veuillez sélectionner une option dans le menu déroulant.</p>
+                            </div>
+                            <!-- FORM HIDDEN PART - APPT ONLY -->
+                            <div class="d-none contact__apptFormHidden">
+                                <label for="appointment" class="form-label fw-bold">Sélectionnez la prestation
+                                    désirée</label>
+                                <select name="appointment" id="appointment"
+                                    class="form-select contact__hiddenSelect text-capitalize">
+                                    <option value="" selected disabled>Sélectionner une prestation</option>
+                                    <optgroup label="Soins" class="contact__mainOptionGrp">
+                                        <option value="sce">Soin Coup d'Éclat</option>
+                                        <option value="shn">Soin Hydratant & Nourrissant</option>
+                                        <option value="st">Soin Traitant</option>
+                                        <option value="saa">Soin Anti-Age</option>
+                                        <option value="ct">Cryothérapie</option>
+                                    </optgroup>
+                                    <optgroup label="Massages" class="contact__mainOptionGrp">
+                                        <option value="mk">Kobido</option>
+                                        <option value="mks">Kobido Supreme</option>
+                                        <option value="mbr">Massage Beauté du Regard</option>
+                                        <option value="mc">Massage Californien</option>
+                                        <option value="gm">Gommage & Massage</option>
+                                    </optgroup>
+                                    <optgroup label="Épilations" class="contact__mainOptionGrp">
+                                        <option value="evl">Lèvres</option>
+                                        <option value="evm">Menton</option>
+                                        <option value="evj">Joues</option>
+                                        <option value="evc">Visage Complet</option>
+                                        <option value="esl">Création Ligne Sourcils</option>
+                                        <option value="ees">Entretien Sourcils</option>
+                                        <option value="ec">Cou</option>
+                                        <option value="ev">Ventre</option>
+                                        <option value="ejc">Cuisses</option>
+                                        <option value="edj">1/2 Jambes</option>
+                                        <option value="etqj">3/4 Jambes</option>
+                                        <option value="ej">Jambes Completes</option>
+                                        <option value="eme">Maillot Echancré</option>
+                                        <option value="emsi">Maillot Semi-Intégral</option>
+                                        <option value="emi">Maillot Intégral</option>
+                                        <option value="ea">Aisselles</option>
+                                        <option value="ebd">1/2 Bras</option>
+                                        <option value="ebc">Bras Complets</option>
+                                    </optgroup>
+                                </select>
+                                <button type="button" class="btn btn-primary mt-3 contact__addBtn"><i
+                                        class="fa-solid fa-circle-plus align-middle me-2 fs-5"></i>Ajoutez une
+                                    prestation</button>
+                            </div>
+                            <div>
+                                <label for="message" class="form-label fw-bold">Message</label>
+                                <textarea name="message" id="message" cols="30" rows="10" class="form-control"
+                                    placeholder="Entrez votre message..." required></textarea>
+                                <p class="invalid-feedback">Veuillez entrer un message avant d'envoyer le formulaire.
+                                </p>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-primary w-75">Envoyer</button>
+                                <button type="reset" class="btn btn-dark w-25">Effacer</button>
+                            </div>
+                        </form>
+                        <!-- FORM SUBMITTED AND HIDDEN / SUMMARY -->
+                        <div class="contact__formSummary text-center d-none flex-column gap-3">
+                            <h2 class="heading-2 contact__margin">Merci d'avoir contacté Institut For You!</h2>
+                            <p class="contact__margin">Brigitte, votre esthéticienne, vous recontactera dans les
+                                meilleurs délais,
+                                par email ou
+                                téléphone.</p>
+                            <h3 class="heading-3 contact__margin">Récapitulatif de votre demande:</h3>
+                            <div
+                                class="border border-2 border-dark d-flex flex-column gap-2 rounded p-2 text-start bg-secondary contact__margin">
+                                <div class="p-2 rounded border border-1 border-dark">
+                                    <strong class="contact__formTopic">Sujet: </strong>
+                                    <ul class="d-none contact__formServices mb-0"></ul>
+                                </div>
+                                <div class="rounded border border-1 border-dark p-2">
+                                    <p class="contact__formMessage mb-0"></p>
+                                </div>
+                                <small class="contact__formTime text-center fst-italic">Envoyé le </small>
+                            </div>
+                            <p class="contact__margin">En attendant une réponse, veuillez trouver ci-dessus du contenu
+                                qui pourrait
+                                vous
+                                intéresser.</p>
+                            <div class="contact__formSuggestions">
+                                <!-- APPT SUGGESTIONS -->
+                                <div
+                                    class="contact__apptSuggestions d-none flex-wrap justify-content-center gap-3 contact__margin">
+                                    <div class="border p-2 d-flex flex-column gap-2 rounded bg-white">
+                                        <img src="https://placehold.co/400" alt="Placeholder image"
+                                            class="img-fluid object-fit-cover">
+                                        <a
+                                            class="btn btn-secondary flex-fill d-flex justify-content-center align-items-center"></a>
+                                    </div>
+                                    <div class="border p-2 d-flex flex-column gap-2 rounded bg-white">
+                                        <img src="https://placehold.co/400" alt="Placeholder image"
+                                            class="img-fluid object-fit-cover">
+                                        <a
+                                            class="btn btn-secondary flex-fill d-flex justify-content-center align-items-center"></a>
+                                    </div>
+                                    <div class="border p-2 d-flex flex-column gap-2 rounded bg-white">
+                                        <img src="https://placehold.co/400" alt="Placeholder image"
+                                            class="img-fluid object-fit-cover">
+                                        <a
+                                            class="btn btn-secondary flex-fill d-flex justify-content-center align-items-center"></a>
+                                    </div>
+                                    <div class="border p-2 d-flex flex-column gap-2 rounded bg-white">
+                                        <img src="https://placehold.co/400" alt="Placeholder image"
+                                            class="img-fluid object-fit-cover">
+                                        <a
+                                            class="btn btn-secondary flex-fill d-flex justify-content-center align-items-center"></a>
+                                    </div>
+                                </div>
+                                <!-- OTHER / INFO / PRODUCTS SUGGESTIONS -->
+                                <div class="col faq d-flex flex-column gap-3 d-none contact__margin" id="faq"></div>
+                                <!-- FEEDBACK SUGGESTIONS -->
+                                <div class="contact__feedbackSuggestions d-none">
+                                    <div id="reviewsCarousel" class="carousel slide"></div>
+                                    <div class="contact__review bg-secondary rounded p-3 mb-3 contact__margin">
+                                        <p>Vous aussi, en seulement quelques minutes, vous pouvez soutenir Brigitte en
+                                            lui
+                                            laissant un
+                                            avis 5 etoiles sur Google!</p>
+                                        <button class="btn btn-primary w-100">Donner son avis</button>
+                                    </div>
+                                </div>
+                                <a href="/home.html" class="btn btn-primary m-3">Retour à la page d'accueil</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact__bikeImg">
+                        <img src="/images/contact/woman_biking_illustration.svg" alt="woman biking illustration"
+                            class="img-fluid">
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <!-- FOOTER -->
+    <footer id="footer" class="footer bg-primary overflow-hidden py-2"></footer>
+    <!-- JAVASCRIPT -->
+    <script type="module" src="/Js/contact/index.js"></script>
+
+</body>
+
+</html>

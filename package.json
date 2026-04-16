@@ -1,8 +1,0 @@
-{
-  "name": "institut-for-you-website",
-	"version": "1.0.0",
-  "dependencies": {
-    "autoprefixer": "^10.4.16",
-    "bootstrap": "^5.3.2"
-  }
-}

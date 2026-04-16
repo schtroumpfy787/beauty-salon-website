@@ -1,0 +1,20 @@
+{
+  "name": "institut-for-you-website",
+  "version": "1.0.0",
+  "scripts": {
+    "build:css": "sass Sass/main.scss dist/CSS/main-min.css --style=compressed --no-source-map",
+    "build:copy-html": "cp *.html dist/ && mkdir -p dist/components && cp components/*.html dist/components/",
+    "build:copy-js": "cp -r Js dist/Js",
+    "build:copy-images": "cp -r images dist/images",
+    "build:copy-vendor": "mkdir -p dist/vendor && cp node_modules/bootstrap/dist/js/bootstrap.bundle.min.js dist/vendor/",
+    "build:clean": "rm -rf dist",
+    "build": "npm run build:clean && mkdir -p dist/CSS && npm run build:css && npm run build:copy-html && npm run build:copy-js && npm run build:copy-images && npm run build:copy-vendor"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.16",
+    "bootstrap": "^5.3.2"
+  },
+  "devDependencies": {
+    "sass": "^1.69.0"
+  }
+}

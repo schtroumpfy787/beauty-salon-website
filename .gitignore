@@ -1,2 +1,26 @@
-.txt
+# Dependencies
 node_modules/
+
+# Build output
+dist/
+
+# Environment
+.env
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Videos (too large for git, serve separately)
+frontend/videos/
+
+# Source maps
+*.css.map
+
+# Logs
+*.log
+npm-debug.log*

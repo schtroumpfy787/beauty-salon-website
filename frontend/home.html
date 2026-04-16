@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Page d'accueil du site internet officiel de l'Institut For You, salon de beauté et de soins esthétiques à Tarascon en Provence, France">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="esthétique beauté épilation massage soins salon institut">
+    <meta name="author" content="Leo">
+    <title>Accueil | Institut For You</title>
+    <link rel="stylesheet" href="CSS/main-min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/images/placeholder_favicon.svg" sizes="32x32">
+    <script src="/vendor/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/36dedec49f.js" crossorigin="anonymous"></script>
+</head>
+
+<body id="bodyhome" class="homepage">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg bg-primary fixed-top w-100" id="nav"></nav>
+    <!-- START THE WEBSITE MAIN CONTENT  -->
+    <main>
+        <div class="container-fluid">
+            <!-- BACK TO TOP FIXED BUTTON -->
+            <button class="btn position-fixed scrollTop" title="retour au haut de la page">
+                <i class="fa-solid fa-angles-up"></i>
+            </button>
+            <!-- START OF THE SECTION 1 - INTRO  -->
+            <section class="row intro" id="intro">
+                <!-- VIDEO CONTAINER -->
+                <div
+                    class="p-0 intro__containers intro__containers--video position-relative d-flex justify-content-center">
+                    <h1 class="intro__animatedTitle fw-bold position-absolute d-flex flex-column justify-content-center align-items-center"
+                        id="cutoutbox">
+                        <span>L'institut où vous êtes traitée avec</span>
+                        <strong class="cutout d-block rounded text-uppercase p-2">patience</strong>
+                    </h1>
+                    <video src="/videos/IFY_portrait_video.mp4" height="800" width="400" muted loop autoplay
+                        class="object-fit-cover w-100 h-100">
+                    </video>
+                    <img src="/images/homepage/facial_massage_eyes_closed_image.jpg" alt="woman facial massage"
+                        width="6383" height="4255" loading="lazy" class="img-fluid d-none intro__altImg">
+                </div>
+                <!-- TEXT CONTAINER -->
+                <div class="intro__containers intro__containers--text d-flex justify-content-center align-items-center">
+                    <div class="intro__textContent d-flex flex-column justify-content-evenly gap-3 mx-auto rounded">
+                        <h1 class="heading-1 text-center d-none d-lg-block">L'institut où vous êtes traitée
+                            comme <span>une
+                                reine.</span></h1>
+                        <h1 class="heading-1 d-lg-none text-center m-0">Envie de se faire <span>dorloter ?</span></h1>
+                        <p class="m-0 lh-lg">Évadez vous le temps d'un soin entre les mains expertes de Brigitte, votre
+                            esthéticienne diplômée, qui vous fera goûter au plaisir de la relaxation d'un niveau
+                            supérieur.</p>
+                        <p class="m-0 lh-lg"> Dans un cadre de détente aux senteurs parfumées, privatisé pour vous le
+                            temps de votre rendez-vous, ou le confort et la propreté sont des priorités, vous recevrez
+                            toute l'attention et bienveillance que vous méritez.</p>
+                        <p class="m-0 lh-lg"> Offrez-vous un moment de bien-être, dans le calme et l'intimité de votre
+                            institut reservé à la clientele féminine.</p>
+                        <a href="/home.html?target=features" role="button" data-redirect="features"
+                            aria-roledescription="button" class="btn btn-primary d-none d-lg-block">Prête à vous faire
+                            dorloter ?</a>
+                    </div>
+                </div>
+            </section>
+            <!-- START OF THE SECTION 2 - FEATURES -->
+            <section class="row features" id="features">
+                <div class="col-12 p-4">
+                    <h2 class="heading-1 text-center mb-4 mb-lg-5">Les prestations qui n'ont plus à faire leur preuves
+                    </h2>
+                    <!-- MOBILE / TABLET - PORTRAIT ORIENTATION ONLY - ACCORDION -->
+                    <div class="accordion features__accordion mx-auto slideInElement" id="home-accordion">
+                        <!-- ACCORDION ITEM ONE -->
+                        <div class="accordion-item">
+                            <div class="accordion-header features__accordionHeader d-flex flex-column gap-2 p-3">
+                                <div class="d-flex justify-content-between w-100 align-items-center">
+                                    <div class="flex-fill">
+                                        <h4 class="mb-0 fw-bold align-self-start heading-5">Sourcils</h4>
+                                        <a href="/home.html" data-inactive="true"
+                                            class="subheading align-self-start text-uppercase text-decoration-none mb-3">épilation</a>
+                                    </div>
+                                    <button class="features__toggle accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapsedOne" aria-expanded="false"
+                                        aria-controls="collapsedOne">
+                                        <img src="/images/homepage/arrow_circle_icon.svg" alt="arrow icon"
+                                            class="features__arrow features__arrow--up" width="40" height="40">
+                                    </button>
+                                </div>
+                                <img loading="lazy" src="/images/homepage/eyebrow_waxing_image.jpg"
+                                    alt="woman getting her eyebrow waxed" class="img-fluid rounded" width="626"
+                                    height="416">
+                            </div>
+                            <div class="accordion-collapse collapse" data-bs-parent="#home-accordion" id="collapsedOne">
+                                <div class="accordion-body p-3 pt-0">
+                                    <ul class="mt-3 ps-3">
+                                        <li>Réalisée de facon professionnelle, l'épilation des sourcils met en valeur
+                                            votre visage.
+                                        </li>
+                                        <li>Au fil des épilations, la repousse est plus fine et lente.</li>
+                                        <li>Une crème apaisante est utilisée pour réduire le risque de ressentir
+                                            quelconque désagrément.</li>
+                                    </ul>
+                                    <div class="d-flex gap-2">
+                                        <a href="/contact.html?book=ees" role="button" aria-roledescription="button"
+                                            class="btn btn-primary flex-fill">Réserver</a>
+                                        <a href="/home.html" data-inactive="true" role="button" aria-roledescription="button"
+                                            class="btn btn-primary flex-fill">Découvrir</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ACCORDION ITEM TWO -->
+                        <div class="accordion-item">
+                            <div class="accordion-header features__accordionHeader d-flex flex-column gap-2 p-3">
+                                <div class="d-flex justify-content-between w-100 align-items-center">
+                                    <div class="flex-fill">
+                                        <h4 class="mb-0 fw-bold align-self-start heading-5">Demi-Jambes</h4>
+                                        <a href="/home.html" data-inactive="true"
+                                            class="subheading align-self-start text-uppercase text-decoration-none mb-3">épilation</a>
+                                    </div>
+                                    <button class="features__toggle accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapsedTwo" aria-expanded="false"
+                                        aria-controls="collapsedTwo">
+                                        <img src="/images/homepage/arrow_circle_icon.svg" alt="arrow icon"
+                                            class="features__arrow features__arrow--up" width="40" height="40">
+                                    </button>
+                                </div>
+                                <img loading="lazy" src="/images/homepage/leg_waxing_image.jpg"
+                                    alt="woman getting her calf waxed - image" class="img-fluid rounded" width="7360"
+                                    height="4912">
+                            </div>
+                            <div class="accordion-collapse collapse" data-bs-parent="#home-accordion" id="collapsedTwo">
+                                <div class="accordion-body p-3 pt-0">
+                                    <ul class="mt-3 ps-3">
+                                        <li>Avant chaque épilation, votre peau est préparée avec une lotion à base d'eau
+                                            florale au bleuet.</li>
+                                        <li>Des cires de fabricants français réputés sont utilisées pour vous proccurer
+                                            une épilation en douceur.</li>
+                                        <li>Après l'épilation, un lait hydratant ou une huile vous sont proposés.</li>
+                                    </ul>
+                                    <div class="d-flex gap-2">
+                                        <a href="/contact.html?book=edj" role="button" aria-roledescription="button"
+                                            class="btn btn-primary flex-fill">Réserver</a>
+                                        <a href="/home.html" data-inactive="true" role="button" aria-roledescription="button"
+                                            class="btn btn-primary flex-fill">Découvrir</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ACCORDION ITEM THREE -->
+                        <div class="accordion-item">
+                            <div class="accordion-header features__accordionHeader d-flex flex-column gap-2 p-3">
+                                <div class="d-flex justify-content-between w-100 align-items-center">
+                                    <div class="flex-fill">
+                                        <h4 class="mb-0 fw-bold align-self-start heading-5">Kobido Suprême</h4>
+                                        <a href="/massages.html"
+                                            class="subheading align-self-start text-uppercase text-decoration-none mb-3"
+                                            data-redirect="null">massage</a>
+                                    </div>
+                                    <button class="features__toggle accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapsedThree" aria-expanded="false"
+                                        aria-controls="collapsedThree">
+                                        <img src="/images/homepage/arrow_circle_icon.svg" alt="arrow icon"
+                                            class="features__arrow features__arrow--up" width="40" height="40">
+                                    </button>
+                                </div>
+                                <img loading="lazy" src="/images/homepage/forehead_massage_image.jpg"
+                                    alt="woman getting a forehead massage - image" class="img-fluid rounded"
+                                    width="6000" height="4000">
+                            </div>
+                            <div class="accordion-collapse collapse" data-bs-parent="#home-accordion"
+                                id="collapsedThree">
+                                <div class="accordion-body p-3 pt-0">
+                                    <ul class="mt-3 ps-3">
+                                        <li>Plus qu'un massage, le kobido est un art traditionnel japonnais.</li>
+                                        <li>Son effet tonnifiant et lissant (sans injection!) lui valent le surnom de
+                                            lifting naturel.</li>
+                                        <li>La libération des tensions musculaires offre une sensation de relaxation
+                                            profonde.</li>
+                                    </ul>
+                                    <div class="d-flex gap-2">
+                                        <a href="/contact.html?book=mks" role="button" aria-roledescription="button"
+                                            class="btn btn-primary flex-fill">Réserver</a>
+                                        <a href="/massages.html?target=mks" data-redirect="mks" role="button"
+                                            aria-roledescription="button"
+                                            class="btn btn-primary flex-fill">Découvrir</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- MOBILE / TABLET / DESKTOP - LANDSCAPE ORIENTATION ONLY - TABLE -->
+                    <table class="features__table table table-bordered mx-auto mt-3 slideInElement">
+                        <thead class="text-center">
+                            <tr>
+                                <th class="heading-5">
+                                    Sourcils
+                                    <a href="#" data-inactive="true" role="button" aria-roledescription="button"
+                                        class="subheading d-block text-uppercase text-decoration-none">épilation</a>
+                                </th>
+                                <th class="heading-5">
+                                    Demi-Jambes
+                                    <a href="#" data-inactive="true" role="button" aria-roledescription="button"
+                                        class="subheading d-block text-uppercase text-decoration-none">épilation</a>
+                                </th>
+                                <th class="heading-5">
+                                    Kobido Suprême
+                                    <a href="/massages.html" role="button" aria-roledescription="button"
+                                        class="subheading d-block text-uppercase text-decoration-none"
+                                        data-redirect="null">massage</a>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="tr">
+                                <td class="col-4">
+                                    <div class="features__td d-flex flex-column justify-content-between">
+                                        <div>
+                                            <img loading="lazy" src="/images/homepage/eyebrow_waxing_image.jpg"
+                                                alt="woman getting her eyebrow waxed" class="img-fluid rounded"
+                                                width="626" height="416">
+                                        </div>
+                                        <ul class="mt-3 flex-fill d-flex flex-column justify-content-between ps-3">
+                                            <li>Réalisée de facon professionnelle, l'épilation des sourcils met en
+                                                valeur votre visage.
+                                            </li>
+                                            <li>Au fil des épilations, la repousse est plus fine et lente.</li>
+                                            <li>Une crème apaisante est utilisée pour réduire le risque de ressentir
+                                                quelconque désagrément.</li>
+                                        </ul>
+                                        <div class="d-flex gap-2">
+                                            <a href="/contact.html?book=ees" role="button" aria-roledescription="button"
+                                                class="btn btn-primary facial_massage_image flex-fill">Réserver</a>
+                                            <a href="/home.html" role="button" data-inactive="true" aria-roledescription="button"
+                                                class="btn btn-primary facial_massage_image flex-fill">Découvrir</a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="col-4">
+                                    <div class="features__td d-flex flex-column justify-content-between">
+                                        <div>
+                                            <img loading="lazy" src="/images/homepage/leg_waxing_image.jpg"
+                                                alt="woman getting her calf waxed" class="img-fluid rounded"
+                                                width="7360" height="4912">
+                                        </div>
+                                        <ul class="mt-3 flex-fill d-flex flex-column justify-content-between ps-3">
+                                            <li>Avant chaque épilation, votre peau est préparée avec une lotion à base
+                                                d'eau florale au bleuet.</li>
+                                            <li>Des cires de fabricants français réputés sont utilisées pour vous
+                                                proccurer une épilation en douceur.</li>
+                                            <li>Après l'épilation, un lait hydratant ou une huile vous sont proposés.
+                                            </li>
+                                        </ul>
+                                        <div class="d-flex gap-2">
+                                            <a href="/contact.html?book=edj" role="button" aria-roledescription="button"
+                                                class="btn btn-primary flex-fill">Réserver</a>
+                                            <a href="/home.html" role="button" aria-roledescription="button" data-inactive="true"
+                                                class="btn btn-primary flex-fill">Découvrir</a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="col-4">
+                                    <div class="features__td d-flex flex-column justify-content-between">
+                                        <div>
+                                            <img loading="lazy" src="/images/homepage/forehead_massage_image.jpg"
+                                                alt="woman getting a forehead massage - image" class="img-fluid rounded"
+                                                width="6000" height="4000">
+                                        </div>
+                                        <ul class="mt-3 flex-fill d-flex flex-column justify-content-between ps-3">
+                                            <li>Plus qu'un massage, le kobido est un art traditionnel japonnais.</li>
+                                            <li>Son effet tonnifiant et lissant (sans injection!) lui valent le surnom
+                                                de lifting naturel.</li>
+                                            <li>La libération des tensions musculaires offre une sensation de relaxation
+                                                profonde.</li>
+                                        </ul>
+                                        <div class="d-flex gap-2">
+                                            <a href="/contact.html?book=mks" role="button" aria-roledescription="button"
+                                                class="btn btn-primary flex-fill">Réserver</a>
+                                            <a href="/massages.html?target=mks" role="button"
+                                                aria-roledescription="button" class="btn btn-primary flex-fill"
+                                                data-redirect="mks">Découvrir</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <!-- START OF THE SECTION 3 - GIFT CARD -->
+            <section class="gift row bg-primary">
+                <div class="col-12 d-flex flex-column gift__wrapper p-2">
+                    <h2 class="heading-1 gift__heading text-center text-white">Que pourriez offrir de plus beau que le
+                        bien-être?</h2>
+                    <div
+                        class="gift__container gift__container--img d-flex flex-column gap-2 justify-content-center flex-fill">
+                        <img loading="lazy" src="/images/homepage/spa_illustration.svg" alt="woman in a spa">
+                        <a href="/gift.html" role="button" aria-roledescription="button"
+                            class="btn btn-secondary gift__btn">Offrir</a>
+                    </div>
+                    <div
+                        class="gift__container gift__container--text d-flex align-items-center flex-column text-center">
+                        <img loading="lazy" src="/images/homepage/gift_card_icon.svg" alt="gift card icon"
+                            class="gift__icon">
+                        <p class="mb-0">En quête d'une idée cadeau qui fera plaisir à tous les coups? Ne cherchez pas
+                            plus loin, le bon cadeau Institut For You, c'est ce qu'il vous faut.
+                        </p>
+                        <p class="mb-0">
+                            Que ce soit pour votre mère, grand-mère, soeur, amie ou qui que ce soit qui vous est cher,
+                            faisant partie de la gent féminine, ce cadeau ne tombera jamais à l'eau.
+                        </p>
+                        <p class="mb-0">
+                            Offrir un moment de calme et de détente à vos proches n'est qu'à un clic près! N'attendez
+                            plus.</p>
+                    </div>
+                </div>
+            </section>
+            <!-- START OF THE SECTION 4 - BENEFITS -->
+            <section class="row flex-column benefit gap-3 my-4 align-items-center" id="benefits">
+                <!-- BENEFIT 1 - SUPPORT LOCAL ECONOMY -->
+                <div
+                    class="benefit__content flex-column px-3 col-12 d-flex justify-content-evenly align-items-center gap-3">
+                    <p class="mb-0 benefit__p benefit__p--left bg-white">En choissisant de faire appel à une commercante
+                        indépendante pour vos soins esthétiques, vous participez activement à soutenir <em
+                            class="emphasize fst-normal lh-sm">l'économie locale</em> de Tarascon! Lorsque vous achetez
+                        des biens ou services locaux, vous encouragez les petites entreprises près de chez vous. De
+                        plus, le fait de savoir à qui vous reversez votre argent durement gagné est rassurant.</p>
+                    <div class="benefit__img benefit__img--right rounded overflow-hidden slideInElement">
+                        <img src="/images/homepage/salon_front_door_image.jpg" alt="salon front door image"
+                            class="img-fluid" width="884" height="1186">
+                    </div>
+                </div>
+                <!-- BENEFIT 2 - YOU KNOW WHO YOU TAKES CARE OF YOU -->
+                <div
+                    class="benefit__content flex-column px-3 col-12 d-flex justify-content-evenly align-items-center gap-3">
+                    <div class="benefit__img benefit__img--left rounded overflow-hidden slideInElement">
+                        <img src="/images/homepage/woman_wawing_image.jpg" alt="woman waving image" class="img-fluid"
+                            width="1800" height="1200">
+                    </div>
+                    <p class="mb-0 benefit__p benefit__p--right bg-white">La bienveillance de Brigitte, qui vous
+                        accueille sans émettre quelconque jugement, exactement <em
+                            class="emphasize fst-normal lh-sm">telle
+                            que vous êtes,</em> vous permet de profiter
+                        pleinement de votre rendez-vous, sans arrière-pensée. La bonne nouvelle? Vous savez à qui vous
+                        avez à faire et êtes certaine de la retrouver à chacune de vos visites puisque qu'elle est
+                        l'unique esthéticienne de l'institut.
+                    </p>
+                </div>
+                <!-- BENEFIT 3 - ALL THE ATTENTION FOR YOU -->
+                <div
+                    class="benefit__content flex-column px-3 col-12 d-flex justify-content-evenly align-items-center gap-3">
+                    <p class="mb-0 benefit__p benefit__p--left bg-white">Pourquoi être traitée à la chaine, de facon
+                        impersonnelle, à la va-vite, quand vous pouvez choisir d'être privilegiée? Brigitte vous recoit
+                        sur rdv uniquement et <em class="emphasize fst-normal lh-sm">privatise l'intitut</em> pour
+                        l'occasion. Ses produits sont rigoureusement selectionnés, parmi les meilleurs fournisseurs de
+                        France.</p>
+                    <div class="benefit__img benefit__img--right rounded overflow-hidden slideInElement">
+                        <img src="/images/homepage/coffee_woman_image.jpg" alt="woman drinking a coffee"
+                            class="img-fluid" width="2215" height="3169">
+                    </div>
+                </div>
+                <!-- BENEFIT 4 - SPECIALISED AND PROFESSIONAL -->
+                <div
+                    class="benefit__content flex-column px-3 col-12 d-flex justify-content-evenly align-items-center gap-3">
+                    <div class="benefit__img benefit__img--left rounded overflow-hidden slideInElement">
+                        <img src="/images/homepage/beauty_products_image.jpg" alt="beauty products details - image"
+                            class="img-fluid" width="3000" height="2000">
+                    </div>
+                    <p class="mb-0 benefit__p benefit__p--right bg-white">Oui mesdames, l'institut est réservé à la
+                        clientèle féminine! Votre esthéticienne vous offre des prestations qui vous sont adaptées et qui
+                        ne perdent pas en qualité avec le temps, à prix abordables! Spécialisée dans les soins du visage
+                        et les massages, Brigitte privilegie <em class="emphasize fst-normal lh-sm">la qualité à la
+                            quantité.</em> La cerise sur le gateau ? Chaque soin comprend une durée d'installation et de
+                        départ offerte. De cette facon, vous ne perdez pas la moindre minute de votre soin!</p>
+                </div>
+                <!-- BENEFIT 5 - UP TO DATE WITH NEW PRACTICES -->
+                <div
+                    class="benefit__content flex-column px-3 col-12 d-flex justify-content-evenly align-items-center gap-3">
+                    <p class="mb-0 benefit__p benefit__p--left bg-white">Régulièrement en formation, Brigitte s'assure
+                        d'être à jour quant aux dernières nouveautés dans le domaine du soin et de la beauté afin de
+                        pouvoir en faire bénficier ses clientes. En continuelle <em
+                            class="emphasize fst-normal lh-sm">quête
+                            d'amélioration</em>, la carte des prestations de
+                        l'institut ne cesse d'évoluer au fil des années.</p>
+                    <div class="benefit__img benefit__img--right rounded overflow-hidden slideInElement">
+                        <img src="/images/homepage/facial_massage_image.jpg"
+                            alt="woman getting a facial massage - image" class="img-fluid" width="4401" height="6016">
+                    </div>
+                </div>
+            </section>
+            <!-- START OF THE SECTION 5 - TESTIMONIALS -->
+            <section class="row mb-3 carouselAndSummary__section" id="reviews">
+                <div class="col-12 d-flex flex-column align-items-center p-0 gap-3">
+                    <h2 class="heading-1 text-center px-2 carousel__title">
+                        Ce que les clientes pensent de l'institut
+                        <a href="https://www.google.com/maps/place/Institut+For+You/@43.808592,4.662918,17z/data=!4m8!3m7!1s0x12b5dc6051c93bbf:0x9ff64027525dbe22!8m2!3d43.808592!4d4.662918!9m1!1b1!16s%2Fg%2F11bxjj6bq4"
+                            target="_blank" class="d-block mt-1 subheading text-uppercase text-decoration-none">avis
+                            google certifiés</a>
+                    </h2>
+                    <!-- CAROUSEL -->
+                    <div id="reviewsCarousel" class="carousel slide"></div>
+                    <!-- SUMMARY AND CALL TO ACTION -->
+                    <h3 class="mb-2 heading-5">Institut For You en quelques mots:</h3>
+                    <div class="summary__animationBox">
+                        <div class="col-12 d-flex summary justify-content-center align-items-center gap-3 flex-column">
+                            <!-- LEFT SUMMARY BOX -->
+                            <figure
+                                class="position-relative overflow-hidden summary__box d-flex flex-column text-center mb-0 p-2 slideInElement"
+                                id="summaryLeft">
+                                <span
+                                    class="d-flex justify-content-center flex-shrink-0 align-items-center rounded-circle mx-auto summary__icon">
+                                    <img loading="lazy" src="/images/homepage/grateful_icon.svg"
+                                        alt="icon with hands and heart representing gratitude">
+                                </span>
+                                <strong class="d-block text-center text-uppercase heading-4">satisfaction</strong>
+                                <figcaption>
+                                    <p>Des dizaines de femmes satisfaites depuis 2015.</p>
+                                    <img loading="lazy" src="/images/homepage/women_diversity_illustration.svg"
+                                        alt="four different women illustration" class="summary__img">
+                                </figcaption>
+                            </figure>
+                            <!-- CENTER SUMMARY BOX -->
+                            <figure
+                                class="summary__box d-flex flex-column summary__box--highlight text-center mb-0 p-2 overflow-hidden gap-3 slideInElement"
+                                id="summaryCenter">
+                                <span
+                                    class="d-flex justify-content-center flex-shrink-0 align-items-center rounded-circle mx-auto summary__icon">
+                                    <img loading="lazy" src="/images/homepage/review_bubble_icon.svg"
+                                        alt="review bubble icon">
+                                </span>
+                                <figcaption class="flex-fill w-100 d-flex flex-column justify-content-between mb-3">
+                                    <strong class="d-block text-center text-uppercase heading-4">excellence</strong>
+                                    5 / 5 étoiles sur plus de 40 avis Google.
+                                    <hr class="summary__hidden">
+                                    <p class="summary__hidden">Vous pouvez soutenir votre esthéticienne <b
+                                            class="text-uppercase">gratuitement</b> en lui laissant un avis 5 étoiles
+                                        sur Google. Brigitte est impatiente de vous lire!</p>
+                                    <div class="summary__btnBox summary__hidden">
+                                        <svg viewBox="0 0 290 60" xmlns="http://www.w3.org/2000/svg"
+                                            class="summary__svg" preserveAspectRatio="none">
+                                            <defs>
+                                                <linearGradient id="gradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                                                    <stop offset="0%" stop-color="#f52c8a" />
+                                                    <stop offset="50%" stop-color="#dd00ff" />
+                                                    <stop offset="100%" stop-color="#6a00ff" />
+                                                </linearGradient>
+                                            </defs>
+                                            <filter id="blurMe">
+                                                <feGaussianBlur in="SourceGraphic" stdDeviation="1" />
+                                            </filter>
+                                            <rect width="98%" height="90%" fill="#eeaad7" rx="6" x="2.5" y="2.5"
+                                                stroke="url(#gradient)" filter="url(#blurMe)" />
+                                        </svg>
+                                        <a role="button" href="https://g.page/r/CSK-XVInQPafEBM/review" target="_blank"
+                                            class="btn summary__hidden bg-secondary text-dark fw-bold">Laissez votre
+                                            avis</a>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                            <!-- RIGHT SUMMARY BOX -->
+                            <figure
+                                class="position-relative overflow-hidden summary__box d-flex flex-column text-center mb-0 p-2 slideInElement"
+                                id="summaryRight">
+                                <span
+                                    class="d-flex justify-content-center flex-shrink-0 align-items-center rounded-circle mx-auto summary__icon">
+                                    <img loading="lazy" src="/images/homepage/euro_tag_icon.svg"
+                                        alt="euro price tag icon">
+                                </span>
+                                <strong class="d-block text-center text-uppercase heading-4">accessibilité</strong>
+                                <figcaption>
+                                    <p>Des prix abordables, accessibles à toutes.</p>
+                                    <img loading="lazy" src="/images/homepage/bath_bomb_illustration.svg"
+                                        alt="bath bomb illustration" class="summary__img">
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <!-- FOOTER -->
+    <footer id="footer" class="footer bg-primary overflow-hidden py-2"></footer>
+    <!-- JAVASCRIPT -->
+    <script type="module" src="/Js/home/index.js"></script>
+
+</body>
+
+</html>

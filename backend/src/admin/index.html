@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Institut For You</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: #f8f9fa; }
+        .admin-header { background: #9a1d71; color: white; }
+        .sidebar { min-height: calc(100vh - 56px); background: #2f2d2d; }
+        .sidebar .nav-link { color: #eeaad7; }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active { color: white; background: #9a1d71; }
+        .login-container { max-width: 400px; margin: 100px auto; }
+        .badge-active { background: #198754; }
+        .badge-inactive { background: #dc3545; }
+        #app { display: none; }
+        #login { display: block; }
+    </style>
+</head>
+<body>
+    <!-- LOGIN FORM -->
+    <div id="login">
+        <div class="login-container">
+            <div class="card shadow">
+                <div class="card-body p-4">
+                    <h2 class="text-center mb-4" style="color: #9a1d71;">Administration</h2>
+                    <h5 class="text-center text-muted mb-4">Institut For You</h5>
+                    <div id="loginError" class="alert alert-danger d-none"></div>
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Nom d'utilisateur</label>
+                            <input type="text" class="form-control" id="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Mot de passe</label>
+                            <input type="password" class="form-control" id="password" required>
+                        </div>
+                        <button type="submit" class="btn w-100" style="background: #9a1d71; color: white;">Connexion</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div id="app">
+        <!-- Header -->
+        <nav class="navbar admin-header px-3">
+            <span class="navbar-brand text-white fw-bold">Institut For You — Admin</span>
+            <div>
+                <span id="adminUser" class="text-white me-3"></span>
+                <button class="btn btn-outline-light btn-sm" id="logoutBtn">Déconnexion</button>
+            </div>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Sidebar -->
+                <nav class="col-md-2 sidebar p-0">
+                    <ul class="nav flex-column pt-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#" data-section="services">
+                                <i class="me-2">📋</i> Services
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-section="content">
+                                <i class="me-2">📝</i> Contenu
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-section="faq">
+                                <i class="me-2">❓</i> FAQ
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-section="contacts">
+                                <i class="me-2">📨</i> Messages
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-section="orders">
+                                <i class="me-2">🎁</i> Commandes
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- Main Content -->
+                <main class="col-md-10 p-4">
+                    <div id="content-area"></div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const API = '/api/admin';
+
+        // ===== AUTH =====
+        async function checkAuth() {
+            try {
+                const res = await fetch(`${API}/me`, { credentials: 'include' });
+                if (res.ok) {
+                    const data = await res.json();
+                    showApp(data.username);
+                    return true;
+                }
+            } catch (e) { /* not authenticated */ }
+            return false;
+        }
+
+        function showApp(username) {
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('app').style.display = 'block';
+            document.getElementById('adminUser').textContent = username;
+            loadSection('services');
+        }
+
+        function showLogin() {
+            document.getElementById('login').style.display = 'block';
+            document.getElementById('app').style.display = 'none';
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const errEl = document.getElementById('loginError');
+            errEl.classList.add('d-none');
+
+            try {
+                const res = await fetch(`${API}/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        username: document.getElementById('username').value,
+                        password: document.getElementById('password').value,
+                    }),
+                });
+                const data = await res.json();
+                if (res.ok) {
+                    showApp(data.username);
+                } else {
+                    errEl.textContent = data.error || 'Erreur de connexion';
+                    errEl.classList.remove('d-none');
+                }
+            } catch (err) {
+                errEl.textContent = 'Erreur de connexion au serveur';
+                errEl.classList.remove('d-none');
+            }
+        });
+
+        document.getElementById('logoutBtn').addEventListener('click', async () => {
+            await fetch(`${API}/logout`, { method: 'POST', credentials: 'include' });
+            showLogin();
+        });
+
+        // ===== NAVIGATION =====
+        document.querySelectorAll('[data-section]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelectorAll('[data-section]').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                loadSection(link.dataset.section);
+            });
+        });
+
+        function loadSection(section) {
+            const area = document.getElementById('content-area');
+            switch (section) {
+                case 'services': loadServices(area); break;
+                case 'content': loadContent(area); break;
+                case 'faq': loadFaq(area); break;
+                case 'contacts': loadContacts(area); break;
+                case 'orders': loadOrders(area); break;
+            }
+        }
+
+        // ===== SERVICES =====
+        async function loadServices(area) {
+            area.innerHTML = '<h2>Services</h2><p>Chargement...</p>';
+            try {
+                const res = await fetch(`${API}/services`, { credentials: 'include' });
+                const services = await res.json();
+                let html = `
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h2>Services (${services.length})</h2>
+                        <button class="btn btn-sm" style="background:#9a1d71;color:white" onclick="showAddService()">+ Ajouter</button>
+                    </div>
+                    <div id="serviceForm" class="d-none mb-3"></div>
+                    <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead><tr><th>ID</th><th>Groupe</th><th>Nom</th><th>Prix</th><th>Durée</th><th>Actif</th><th>Actions</th></tr></thead>
+                        <tbody>`;
+                for (const s of services) {
+                    html += `<tr>
+                        <td>${s.id}</td>
+                        <td>${escapeHtml(s.group)}</td>
+                        <td>${escapeHtml(s.name)}</td>
+                        <td>${Number(s.price).toFixed(2)}&euro;</td>
+                        <td>${s.duration} min</td>
+                        <td><span class="badge ${s.is_active ? 'badge-active' : 'badge-inactive'}">${s.is_active ? 'Oui' : 'Non'}</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary" onclick="editService(${s.id})">Modifier</button>
+                            <button class="btn btn-sm btn-outline-danger" onclick="deleteService(${s.id}, '${escapeHtml(s.name)}')">Supprimer</button>
+                        </td>
+                    </tr>`;
+                }
+                html += '</tbody></table></div>';
+                area.innerHTML = html;
+            } catch (err) {
+                area.innerHTML = '<div class="alert alert-danger">Erreur de chargement des services</div>';
+            }
+        }
+
+        function showAddService() {
+            const form = document.getElementById('serviceForm');
+            form.classList.remove('d-none');
+            form.innerHTML = `
+                <div class="card"><div class="card-body">
+                    <h5>Nouveau Service</h5>
+                    <div class="row g-2">
+                        <div class="col-md-3"><input class="form-control" id="sGroup" placeholder="Groupe (ex: Soins)"></div>
+                        <div class="col-md-2"><input class="form-control" id="sValue" placeholder="Code (ex: sce)"></div>
+                        <div class="col-md-3"><input class="form-control" id="sName" placeholder="Nom"></div>
+                        <div class="col-md-2"><input class="form-control" type="number" step="0.01" id="sPrice" placeholder="Prix"></div>
+                        <div class="col-md-2"><input class="form-control" type="number" id="sDuration" placeholder="Durée (min)"></div>
+                    </div>
+                    <button class="btn btn-sm mt-2" style="background:#9a1d71;color:white" onclick="createService()">Créer</button>
+                    <button class="btn btn-sm btn-secondary mt-2" onclick="document.getElementById('serviceForm').classList.add('d-none')">Annuler</button>
+                </div></div>`;
+        }
+
+        async function createService() {
+            const body = {
+                group: document.getElementById('sGroup').value,
+                value: document.getElementById('sValue').value,
+                name: document.getElementById('sName').value,
+                price: parseFloat(document.getElementById('sPrice').value),
+                duration: parseInt(document.getElementById('sDuration').value),
+            };
+            const res = await fetch(`${API}/services`, {
+                method: 'POST', credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body),
+            });
+            if (res.ok) { loadSection('services'); }
+            else { const d = await res.json(); alert(d.error || 'Erreur'); }
+        }
+
+        async function editService(id) {
+            const res = await fetch(`${API}/services`, { credentials: 'include' });
+            const services = await res.json();
+            const s = services.find(x => x.id === id);
+            if (!s) return;
+
+            const form = document.getElementById('serviceForm');
+            form.classList.remove('d-none');
+            form.innerHTML = `
+                <div class="card"><div class="card-body">
+                    <h5>Modifier: ${escapeHtml(s.name)}</h5>
+                    <div class="row g-2">
+                        <div class="col-md-3"><label class="form-label">Nom</label><input class="form-control" id="eName" value="${escapeHtml(s.name)}"></div>
+                        <div class="col-md-2"><label class="form-label">Prix</label><input class="form-control" type="number" step="0.01" id="ePrice" value="${s.price}"></div>
+                        <div class="col-md-2"><label class="form-label">Durée</label><input class="form-control" type="number" id="eDuration" value="${s.duration}"></div>
+                        <div class="col-md-2"><label class="form-label">Groupe</label><input class="form-control" id="eGroup" value="${escapeHtml(s.group)}"></div>
+                        <div class="col-md-2"><label class="form-label">Actif</label><select class="form-select" id="eActive"><option value="true" ${s.is_active ? 'selected' : ''}>Oui</option><option value="false" ${!s.is_active ? 'selected' : ''}>Non</option></select></div>
+                    </div>
+                    <button class="btn btn-sm mt-2" style="background:#9a1d71;color:white" onclick="updateService(${id})">Enregistrer</button>
+                    <button class="btn btn-sm btn-secondary mt-2" onclick="document.getElementById('serviceForm').classList.add('d-none')">Annuler</button>
+                </div></div>`;
+        }
+
+        async function updateService(id) {
+            const body = {
+                name: document.getElementById('eName').value,
+                price: parseFloat(document.getElementById('ePrice').value),
+                duration: parseInt(document.getElementById('eDuration').value),
+                group: document.getElementById('eGroup').value,
+                is_active: document.getElementById('eActive').value === 'true',
+            };
+            const res = await fetch(`${API}/services/${id}`, {
+                method: 'PUT', credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body),
+            });
+            if (res.ok) { loadSection('services'); }
+            else { const d = await res.json(); alert(d.error || 'Erreur'); }
+        }
+
+        async function deleteService(id, name) {
+            if (!confirm(`Supprimer le service "${name}" ?`)) return;
+            const res = await fetch(`${API}/services/${id}`, {
+                method: 'DELETE', credentials: 'include',
+            });
+            if (res.ok) { loadSection('services'); }
+            else { alert('Erreur lors de la suppression'); }
+        }
+
+        // ===== CONTENT =====
+        async function loadContent(area) {
+            area.innerHTML = '<h2>Contenu du site</h2><p>Chargement...</p>';
+            try {
+                const res = await fetch(`${API}/content`, { credentials: 'include' });
+                const content = await res.json();
+                let html = '<h2>Contenu du site</h2>';
+                for (const c of content) {
+                    html += `
+                        <div class="card mb-2"><div class="card-body">
+                            <label class="form-label fw-bold">${escapeHtml(c.key)}</label>
+                            <div class="input-group">
+                                <input class="form-control" id="content-${escapeHtml(c.key)}" value="${escapeHtml(c.value)}">
+                                <button class="btn btn-outline-primary" onclick="updateContent('${escapeHtml(c.key)}')">Enregistrer</button>
+                            </div>
+                        </div></div>`;
+                }
+                area.innerHTML = html;
+            } catch (err) {
+                area.innerHTML = '<div class="alert alert-danger">Erreur de chargement</div>';
+            }
+        }
+
+        async function updateContent(key) {
+            const value = document.getElementById(`content-${key}`).value;
+            const res = await fetch(`${API}/content/${key}`, {
+                method: 'PUT', credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ value }),
+            });
+            if (res.ok) { loadSection('content'); }
+            else { alert('Erreur'); }
+        }
+
+        // ===== FAQ =====
+        async function loadFaq(area) {
+            area.innerHTML = '<h2>FAQ</h2><p>Chargement...</p>';
+            try {
+                const res = await fetch(`${API}/faq`, { credentials: 'include' });
+                const faqs = await res.json();
+                let html = `
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h2>FAQ (${faqs.length})</h2>
+                        <button class="btn btn-sm" style="background:#9a1d71;color:white" onclick="showAddFaq()">+ Ajouter</button>
+                    </div>
+                    <div id="faqForm" class="d-none mb-3"></div>`;
+                for (const f of faqs) {
+                    html += `
+                        <div class="card mb-2"><div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h5>${escapeHtml(f.question)}</h5>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-primary faq-edit-btn" data-faq-id="${f.id}" data-faq-question="${escapeHtml(f.question)}" data-faq-answer="${escapeHtml(f.answer)}">Modifier</button>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="deleteFaq(${f.id})">Supprimer</button>
+                                </div>
+                            </div>
+                            <p class="text-muted mb-0">${escapeHtml(f.answer)}</p>
+                        </div></div>`;
+                }
+                area.innerHTML = html;
+                // Attach edit handlers via data attributes
+                area.querySelectorAll('.faq-edit-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        editFaq(
+                            parseInt(btn.dataset.faqId),
+                            btn.dataset.faqQuestion,
+                            btn.dataset.faqAnswer
+                        );
+                    });
+                });
+            } catch (err) {
+                area.innerHTML = '<div class="alert alert-danger">Erreur de chargement</div>';
+            }
+        }
+
+        function showAddFaq() {
+            const form = document.getElementById('faqForm');
+            form.classList.remove('d-none');
+            form.innerHTML = `
+                <div class="card"><div class="card-body">
+                    <h5>Nouvelle Question</h5>
+                    <input class="form-control mb-2" id="fQuestion" placeholder="Question">
+                    <textarea class="form-control mb-2" id="fAnswer" rows="3" placeholder="Réponse"></textarea>
+                    <button class="btn btn-sm" style="background:#9a1d71;color:white" onclick="createFaq()">Créer</button>
+                    <button class="btn btn-sm btn-secondary" onclick="document.getElementById('faqForm').classList.add('d-none')">Annuler</button>
+                </div></div>`;
+        }
+
+        async function createFaq() {
+            const body = {
+                question: document.getElementById('fQuestion').value,
+                answer: document.getElementById('fAnswer').value,
+            };
+            const res = await fetch(`${API}/faq`, {
+                method: 'POST', credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body),
+            });
+            if (res.ok) { loadSection('faq'); }
+            else { alert('Erreur'); }
+        }
+
+        function editFaq(id, question, answer) {
+            const form = document.getElementById('faqForm');
+            form.classList.remove('d-none');
+            form.innerHTML = `
+                <div class="card"><div class="card-body">
+                    <h5>Modifier la question</h5>
+                    <input class="form-control mb-2" id="efQuestion" value="${escapeHtml(question)}">
+                    <textarea class="form-control mb-2" id="efAnswer" rows="3">${escapeHtml(answer)}</textarea>
+                    <button class="btn btn-sm" style="background:#9a1d71;color:white" onclick="updateFaq(${id})">Enregistrer</button>
+                    <button class="btn btn-sm btn-secondary" onclick="document.getElementById('faqForm').classList.add('d-none')">Annuler</button>
+                </div></div>`;
+        }
+
+        async function updateFaq(id) {
+            const body = {
+                question: document.getElementById('efQuestion').value,
+                answer: document.getElementById('efAnswer').value,
+            };
+            const res = await fetch(`${API}/faq/${id}`, {
+                method: 'PUT', credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body),
+            });
+            if (res.ok) { loadSection('faq'); }
+            else { alert('Erreur'); }
+        }
+
+        async function deleteFaq(id) {
+            if (!confirm('Supprimer cette question ?')) return;
+            const res = await fetch(`${API}/faq/${id}`, {
+                method: 'DELETE', credentials: 'include',
+            });
+            if (res.ok) { loadSection('faq'); }
+            else { alert('Erreur'); }
+        }
+
+        // ===== CONTACTS =====
+        async function loadContacts(area) {
+            area.innerHTML = '<h2>Messages reçus</h2><p>Chargement...</p>';
+            try {
+                const res = await fetch(`${API}/contacts`, { credentials: 'include' });
+                const contacts = await res.json();
+                let html = `<h2>Messages reçus (${contacts.length})</h2>
+                    <div class="table-responsive"><table class="table table-striped table-hover">
+                    <thead><tr><th>Date</th><th>Nom</th><th>Email</th><th>Téléphone</th><th>Motif</th><th>Message</th></tr></thead><tbody>`;
+                for (const c of contacts) {
+                    html += `<tr>
+                        <td>${new Date(c.submitted_at).toLocaleString('fr-FR')}</td>
+                        <td>${escapeHtml(c.name)}</td>
+                        <td>${escapeHtml(c.email)}</td>
+                        <td>${escapeHtml(c.phone)}</td>
+                        <td>${escapeHtml(c.contact_motive || '')}</td>
+                        <td title="${escapeHtml(c.message)}">${escapeHtml((c.message || '').substring(0, 80))}...</td>
+                    </tr>`;
+                }
+                html += '</tbody></table></div>';
+                area.innerHTML = html;
+            } catch (err) {
+                area.innerHTML = '<div class="alert alert-danger">Erreur de chargement</div>';
+            }
+        }
+
+        // ===== ORDERS =====
+        async function loadOrders(area) {
+            area.innerHTML = '<h2>Commandes de bons cadeaux</h2><p>Chargement...</p>';
+            try {
+                const res = await fetch(`${API}/gift-orders`, { credentials: 'include' });
+                const orders = await res.json();
+                let html = `<h2>Commandes de bons cadeaux (${orders.length})</h2>
+                    <div class="table-responsive"><table class="table table-striped table-hover">
+                    <thead><tr><th>Date</th><th>Montant</th><th>Client</th><th>Email</th><th>Statut</th></tr></thead><tbody>`;
+                for (const o of orders) {
+                    html += `<tr>
+                        <td>${new Date(o.created_at).toLocaleString('fr-FR')}</td>
+                        <td>${Number(o.amount).toFixed(2)}&euro;</td>
+                        <td>${escapeHtml(o.customer_name || 'N/A')}</td>
+                        <td>${escapeHtml(o.customer_email || 'N/A')}</td>
+                        <td><span class="badge ${o.status === 'pending' ? 'bg-warning' : 'bg-success'}">${escapeHtml(o.status)}</span></td>
+                    </tr>`;
+                }
+                html += '</tbody></table></div>';
+                area.innerHTML = html;
+            } catch (err) {
+                area.innerHTML = '<div class="alert alert-danger">Erreur de chargement</div>';
+            }
+        }
+
+        // ===== UTILS =====
+        function escapeHtml(str) {
+            if (!str) return '';
+            const div = document.createElement('div');
+            div.textContent = String(str);
+            return div.innerHTML;
+        }
+
+        // Check auth on load
+        checkAuth();
+    </script>
+</body>
+</html>
